@@ -12,7 +12,9 @@
 
     <script type="application/javascript">
         $("#test").click(function() {
-            $.post("/createKortstokk", 1);
+            $.post("/createKortstokk", "1", function() {
+                console.log("del 1 complete");
+            });
         })
     </script>
 </body>
