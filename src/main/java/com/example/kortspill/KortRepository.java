@@ -20,7 +20,6 @@ public class KortRepository {
     }
 
     public void createKortstokk(String kortstokk_id) {
-        System.out.println("del 3 complete");
         String sql = "CREATE TABLE IF NOT EXISTS " + kortstokk_id + " (type varchar(255), nummer int)";
         jdbcTemplate.update(sql);
     }
