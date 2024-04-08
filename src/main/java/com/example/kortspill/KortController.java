@@ -9,8 +9,12 @@ import java.util.List;
 
 @RestController
 public class KortController {
-    @Autowired
+    final
     KortRepository rep;
+
+    public KortController(KortRepository rep) {
+        this.rep = rep;
+    }
 
     @PostMapping("/createKortstokk")
     public void createKortstokk(String kortstokk_id) {
