@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Title</title>
 </head>
 <body>
     <h1>HELLO</h1>
+
+    <button id="test">Klikk meg</button>
+
+    <script type="application/javascript">
+        $("#test").onclick(function() {
+            $.post("/createKortstokk", 1);
+        })
+    </script>
 </body>
 </html>
