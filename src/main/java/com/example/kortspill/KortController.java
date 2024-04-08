@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
 @RestController
 public class KortController {
+    private final KortRepository rep;
+
     @Autowired
-    KortRepository rep;
-
-
+    public KortController(KortRepository rep) {
+        this.rep = rep;
+    }
 
     @PostMapping("/createKortstokk")
     public void createKortstokk(@RequestBody String kortstokk_id) {

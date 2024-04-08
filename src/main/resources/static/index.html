@@ -11,10 +11,15 @@
     <button id="test">Klikk meg</button>
 
     <script type="application/javascript">
+
         let kortstokk_id = "test2";
         $("#test").click(function() {
+            $.post("/createKortstokk", { kortstokk_id: kortstokk_id });
+        });
+
+        /*$("#test").click(function() {
             $.post("/createKortstokk", kortstokk_id);
-        })
+        })*/
     </script>
 </body>
 </html>
