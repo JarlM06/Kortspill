@@ -11,7 +11,7 @@
     <button id="test">Klikk meg</button>
 
     <script type="application/javascript">
-        var kortstokk_id = "test2";
+        let kortstokk_id = "test2";
         $("#test").click(function() {
             $.post("/createKortstokk", kortstokk_id);
         })
