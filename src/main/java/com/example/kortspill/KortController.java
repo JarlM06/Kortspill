@@ -14,8 +14,8 @@ public class KortController {
 
     @PostMapping("/createKortstokk")
     public void createKortstokk(String kortstokk_id) {
-        rep.createKortstokk(kortstokk_id);
         System.out.println("Del 2 complete");
+        rep.createKortstokk(kortstokk_id);
     }
 
     @PostMapping("/insertKort")
