@@ -3,21 +3,20 @@ package com.example.kortspill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 public class KortController {
-    final
+    @Autowired
     KortRepository rep;
 
-    public KortController(KortRepository rep) {
-        this.rep = rep;
-    }
+
 
     @PostMapping("/createKortstokk")
-    public void createKortstokk(String kortstokk_id) {
+    public void createKortstokk(@RequestBody String kortstokk_id) {
         rep.createKortstokk(kortstokk_id);
     }
 
