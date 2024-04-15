@@ -2,9 +2,13 @@ package com.example.kortspill;
 
 public class Kort {
     private String type;
-    private String nummer;
+    private int nummer; // Endret til int fordi nummer vanligvis er en tallverdi
 
-    public Kort(String type, String nummer) {
+    public Kort() {
+        // Tom konstruktør kreves for JPA
+    }
+
+    public Kort(String type, int nummer) {
         this.type = type;
         this.nummer = nummer;
     }
@@ -17,11 +21,11 @@ public class Kort {
         this.type = type;
     }
 
-    public String getNummer() {
+    public int getNummer() {
         return nummer;
     }
 
-    public void setNummer(String nummer) {
+    public void setNummer(int nummer) {
         this.nummer = nummer;
     }
 }

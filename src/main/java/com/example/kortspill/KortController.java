@@ -1,33 +1,52 @@
 package com.example.kortspill;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+
 @RestController
 public class KortController {
-    private final KortRepository rep;
+    private final KortRepository kortRepository;
 
     @Autowired
-    public KortController(KortRepository rep) {
-        this.rep = rep;
+    public KortController(KortRepository kortRepository) {
+        this.kortRepository = kortRepository;
     }
 
     @PostMapping("/createKortstokk")
-    public void createKortstokk(@RequestBody String kortstokk_id) {
-        rep.createKortstokk(kortstokk_id);
+    public ResponseEntity<String> createKortstokk() {
+        try {
+            kortRepository.createKortstokk(); // Opprett kortstokk
+            return ResponseEntity.ok("Kortstokk ble opprettet"); // Returnerer OK-status uten ID
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Feil ved opprettelse av kortstokk: " + e.getMessage());
+        }
     }
 
     @PostMapping("/insertKort")
-    public void insertKort(String kortstokk_id, Kort kort) {
-        rep.insertKort(kortstokk_id, kort);
+    public ResponseEntity<String> insertKort(@RequestParam("kortstokk_id") String kortstokkId, @RequestBody Kort kort) {
+        try {
+            kortRepository.insertKort(kortstokkId, kort);
+            return ResponseEntity.ok("Kortet ble lagt til i kortstokken med ID: " + kortstokkId);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Feil ved innsetting av kort: " + e.getMessage());
+        }
     }
 
     @GetMapping("/getKortstokk")
-    public List<Kortstokk> getKortstokk(String kortstokk_id) {
-        return rep.getKortstokk(kortstokk_id);
+    public ResponseEntity<List<Kort>> getKortstokk(@RequestParam("kortstokk_id") String kortstokkId) {
+        try {
+            List<Kort> kortList = kortRepository.getKortstokk(kortstokkId);
+            return ResponseEntity.ok(kortList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.emptyList());
+        }
     }
 }
